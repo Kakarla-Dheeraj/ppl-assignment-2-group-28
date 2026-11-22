@@ -60,3 +60,10 @@
   (newline)
   (display (postorder-values tree '()))
   (newline))
+
+; print-height-and-leaves : (or/c '() (list/c any/c list? list?)) -> void?
+; Prints on one line using display the list (height leaf-count),
+; followed by a newline.
+(define (print-height-and-leaves tree)
+  (display (tree-stats tree))
+  (newline))

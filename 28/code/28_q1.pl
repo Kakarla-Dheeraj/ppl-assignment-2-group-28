@@ -65,3 +65,8 @@ satisfies_clues(Active, Solution) :-
 solve(Active, Solution) :-
     candidate_solution(Solution),
     satisfies_clues(Active, Solution).
+
+% count_solutions(+Active, -N) counts solutions satisfying Active clues.
+count_solutions(Active, N) :-
+    findall(Solution, solve(Active, Solution), Solutions),
+    length(Solutions, N).

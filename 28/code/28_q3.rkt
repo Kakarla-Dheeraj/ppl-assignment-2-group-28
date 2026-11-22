@@ -29,3 +29,16 @@
       (postorder-values (cadr tree)
                         (postorder-values (caddr tree)
                                           (cons (car tree) tail)))))
+
+; tree-stats : (or/c '() (list/c any/c list? list?)) -> (list/c integer? integer?)
+; Returns the list (height leaf-count) for tree.
+; An empty tree gives (0 0); a leaf node gives (1 1).
+(define (tree-stats tree)
+  (cond
+    [(null? tree) (list 0 0)]
+    [(and (null? (cadr tree)) (null? (caddr tree))) (list 1 1)]
+    [else
+     (let ([left-stats (tree-stats (cadr tree))]
+           [right-stats (tree-stats (caddr tree))])
+       (list (+ 1 (max (car left-stats) (car right-stats)))
+             (+ (cadr left-stats) (cadr right-stats))))]))

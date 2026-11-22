@@ -49,3 +49,14 @@
 (define (print-inorder tree)
   (display (inorder-values tree '()))
   (newline))
+
+; print-all-traversals : (or/c '() (list/c any/c list? list?)) -> void?
+; Prints three lines using display: the inorder list, the preorder list,
+; and the postorder list, each followed by a newline.
+(define (print-all-traversals tree)
+  (display (inorder-values tree '()))
+  (newline)
+  (display (preorder-values tree '()))
+  (newline)
+  (display (postorder-values tree '()))
+  (newline))

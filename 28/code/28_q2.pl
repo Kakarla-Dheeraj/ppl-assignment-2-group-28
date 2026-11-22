@@ -28,3 +28,10 @@ expression(Numbers, bin(Op, LeftTree, RightTree), Value) :-
     expression(LeftNumbers, LeftTree, LeftValue),
     expression(RightNumbers, RightTree, RightValue),
     apply_op(Op, LeftValue, RightValue, Value).
+
+% op_precedence(?Op, ?Prec)
+% Prec is the precedence of a supported expression-tree operator.
+op_precedence('+', 1).
+op_precedence('-', 1).
+op_precedence('*', 2).
+op_precedence('/', 2).

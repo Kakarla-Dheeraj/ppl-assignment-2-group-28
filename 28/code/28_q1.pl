@@ -57,6 +57,10 @@ clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
 
+% CLUE 9: The friend who works in design prefers the embedded project.
+clue(9, Solution) :-
+    member(p(_, design, _, embedded), Solution).
+
 % satisfies_clues(+Active, +GroundSolution) checks every listed clue.
 satisfies_clues(Active, Solution) :-
     forall(member(Number, Active), clue(Number, Solution)).

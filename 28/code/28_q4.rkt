@@ -29,3 +29,21 @@
     (if (null? rest)
         count
         (loop (cdr rest) (+ count 1)))))
+
+;; (my-map f lst) -> list
+;; f: a one-argument function; lst: a proper list.
+;; Returns a list of the same length whose i-th element is (f e_i), where
+;; e_i is the i-th top-level element of lst; f is called exactly once per
+;; element, from left to right.
+;; Recursive reading: walk lst with an accumulator acc, initially ().
+;;   Base case: rest is () -> acc holds the results in reverse order, so
+;;     (my-reverse acc) restores the original order.
+;;   Step: cons (f (car rest)) onto acc and continue on (cdr rest).
+;; The recursive call is in tail position and my-reverse is tail-recursive,
+;; so 10,000-element lists use constant stack space (two linear passes).
+;; Depends on: my-reverse.
+(define (my-map f lst)
+  (let loop ((rest lst) (acc '()))
+    (if (null? rest)
+        (my-reverse acc)
+        (loop (cdr rest) (cons (f (car rest)) acc)))))

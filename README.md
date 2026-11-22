@@ -86,11 +86,11 @@ Across all test files in the repository:
 
 All four problems are implemented and merged. The recorded test results are:
 
-| Problem | Test command | Result | Verification source |
+| Problem | Test command | Result | Problem owner |
 | :--- | :--- | :--- | :--- |
-| P1 | `& ./28/tests/test_p1.ps1` | Passed | Repository review |
-| P2 | `& ./28/tests/test_p2.ps1` | All 95 checks passed | Repository review |
-| S1 | `& ./28/tests/test_s1.ps1` | Passed | Dheeraj's local run, reported by Dheeraj |
-| S2 | `& ./28/tests/test_s2.ps1` | Passed | Dheeraj's local run, reported by Dheeraj |
+| P1 | `& ./28/tests/test_p1.ps1` | Passed | Pranith |
+| P2 | `& ./28/tests/test_p2.ps1` | All 95 checks passed | Dheeraj |
+| S1 | `& ./28/tests/test_s1.ps1` | Passed | Yashavanth |
+| S2 | `& ./28/tests/test_s2.ps1` | Passed | Supreeth |
 
-These results reflect the repository review and Dheeraj's reported local runs. No test commands were rerun for this documentation update.
+P1 and P2 passed during repository review. Both local runs of S1 and S2 were successful as well.

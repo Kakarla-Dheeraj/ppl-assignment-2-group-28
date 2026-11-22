@@ -30,3 +30,8 @@ clue(2, Solution) :-
 % The friend in testing is assigned Python.
 clue(3, Solution) :-
     member(p(_, testing, python, _), Solution).
+
+% Ben prefers web projects and does not work in testing.
+clue(4, Solution) :-
+    member(p('Ben', Dept, _, web), Solution),
+    Dept \= testing.

@@ -19,3 +19,13 @@
       (cons (car tree)
             (preorder-values (cadr tree)
                              (preorder-values (caddr tree) tail)))))
+
+; postorder-values : (or/c '() (list/c any/c list? list?)) list? -> list?
+; Returns the values of tree in postorder (left subtree, right subtree, node)
+; prepended onto tail. For the empty tree (), returns tail.
+(define (postorder-values tree tail)
+  (if (null? tree)
+      tail
+      (postorder-values (cadr tree)
+                        (postorder-values (caddr tree)
+                                          (cons (car tree) tail)))))

@@ -36,6 +36,10 @@ clue(4, Solution) :-
     member(p('Ben', Dept, _, web), Solution),
     Dept \= testing.
 
+% The friend who prefers Java works in design.
+clue(5, Solution) :-
+    member(p(_, design, java, _), Solution).
+
 % Carla's project is not embedded and her department is not development.
 clue(6, Solution) :-
     member(p('Carla', Dept, _, Project), Solution),

@@ -51,3 +51,8 @@ clue(7, Solution) :-
     member(p('Dana', Dept, Lang, _), Solution),
     Lang \= java,
     (Dept = research ; Dept = testing).
+
+% The friend with data works in research and does not use JavaScript.
+clue(8, Solution) :-
+    member(p(_, research, Lang, data), Solution),
+    Lang \= javascript.

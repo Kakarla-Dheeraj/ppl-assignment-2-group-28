@@ -9,3 +9,13 @@
       (inorder-values (cadr tree)
                       (cons (car tree)
                             (inorder-values (caddr tree) tail)))))
+
+; preorder-values : (or/c '() (list/c any/c list? list?)) list? -> list?
+; Returns the values of tree in preorder (node, left subtree, right subtree)
+; prepended onto tail. For the empty tree (), returns tail.
+(define (preorder-values tree tail)
+  (if (null? tree)
+      tail
+      (cons (car tree)
+            (preorder-values (cadr tree)
+                             (preorder-values (caddr tree) tail)))))

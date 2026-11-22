@@ -1,0 +1,5 @@
+﻿*.zo
+compiled/
+*.bak
+*.tmp
+*.test-tmp.rkt

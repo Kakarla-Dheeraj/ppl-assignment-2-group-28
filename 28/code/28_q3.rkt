@@ -42,3 +42,10 @@
            [right-stats (tree-stats (caddr tree))])
        (list (+ 1 (max (car left-stats) (car right-stats)))
              (+ (cadr left-stats) (cadr right-stats))))]))
+
+; print-inorder : (or/c '() (list/c any/c list? list?)) -> void?
+; Prints on one line using display the list of values of tree in inorder,
+; followed by a newline.
+(define (print-inorder tree)
+  (display (inorder-values tree '()))
+  (newline))

@@ -35,3 +35,9 @@ clue(3, Solution) :-
 clue(4, Solution) :-
     member(p('Ben', Dept, _, web), Solution),
     Dept \= testing.
+
+% Carla's project is not embedded and her department is not development.
+clue(6, Solution) :-
+    member(p('Carla', Dept, _, Project), Solution),
+    Dept \= development,
+    Project \= embedded.

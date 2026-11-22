@@ -61,3 +61,15 @@ render_expression(bin(Op, Left, Right), Text) :-
     render_operand(Left, Prec, left, LeftText),
     render_operand(Right, Prec, right, RightText),
     format(string(Text), '~s~a~s', [LeftText, Op, RightText]).
+
+% generate_equation(+List, -Equation)
+% For a finite proper list of non-negative integers, Equation is a canonical
+% equation string using every occurrence once in order, with equal values.
+generate_equation(List, Equation) :-
+    nonempty_split(List, LeftNumbers, RightNumbers),
+    expression(LeftNumbers, LeftTree, LeftValue),
+    expression(RightNumbers, RightTree, RightValue),
+    LeftValue =:= RightValue,
+    render_expression(LeftTree, LeftText),
+    render_expression(RightTree, RightText),
+    format(string(Equation), '~s=~s', [LeftText, RightText]).

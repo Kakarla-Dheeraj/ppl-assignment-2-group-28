@@ -60,3 +60,8 @@ clue(8, Solution) :-
 % satisfies_clues(+Active, +GroundSolution) checks every listed clue.
 satisfies_clues(Active, Solution) :-
     forall(member(Number, Active), clue(Number, Solution)).
+
+% solve(+Active, -Solution) generates candidates satisfying only Active clues.
+solve(Active, Solution) :-
+    candidate_solution(Solution),
+    satisfies_clues(Active, Solution).

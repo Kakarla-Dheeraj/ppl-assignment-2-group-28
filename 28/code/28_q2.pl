@@ -50,3 +50,14 @@ render_operand(bin(Op, Left, Right), ParentPrec, Side, Text) :-
     ->  format(string(Text), '(~s)', [InnerText])
     ;   Text = InnerText
     ).
+
+% render_expression(+Tree, -Text)
+% Text is the canonical no-space string for a ground expression tree,
+% without outer parentheses around the complete expression.
+render_expression(num(N), Text) :-
+    format(string(Text), '~d', [N]).
+render_expression(bin(Op, Left, Right), Text) :-
+    op_precedence(Op, Prec),
+    render_operand(Left, Prec, left, LeftText),
+    render_operand(Right, Prec, right, RightText),
+    format(string(Text), '~s~a~s', [LeftText, Op, RightText]).

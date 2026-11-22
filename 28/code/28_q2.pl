@@ -73,3 +73,10 @@ generate_equation(List, Equation) :-
     render_expression(LeftTree, LeftText),
     render_expression(RightTree, RightText),
     format(string(Equation), '~s=~s', [LeftText, RightText]).
+
+% all_equations(+List, -Equations)
+% Equations contains every canonical equation string for List, once each,
+% in standard term order; it is empty when no valid equation exists.
+all_equations(List, Equations) :-
+    findall(Equation, generate_equation(List, Equation), Generated),
+    sort(Generated, Equations).

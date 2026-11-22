@@ -35,3 +35,18 @@ op_precedence('+', 1).
 op_precedence('-', 1).
 op_precedence('*', 2).
 op_precedence('/', 2).
+
+% render_operand(+Tree, +ParentPrec, +Side, -Text)
+% For a ground expression tree and Side left or right, Text is its string
+% with the parentheses required in that operand position.
+render_operand(num(N), _ParentPrec, _Side, Text) :-
+    render_expression(num(N), Text).
+render_operand(bin(Op, Left, Right), ParentPrec, Side, Text) :-
+    op_precedence(Op, Prec),
+    render_expression(bin(Op, Left, Right), InnerText),
+    (   (   Side == left, Prec < ParentPrec
+        ;   Side == right, Prec =< ParentPrec
+        )
+    ->  format(string(Text), '(~s)', [InnerText])
+    ;   Text = InnerText
+    ).

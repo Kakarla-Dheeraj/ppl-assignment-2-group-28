@@ -11,7 +11,7 @@ Logic and Functional Programming (CS F301) — SWI-Prolog 9.x and Racket 8.x
 | **P1** | Prolog: Department Assignment Puzzle | `28/code/28_q1.pl` | `28/tests/test_p1.ps1` | `28/prompts/P1.md` | Pranith Mahanti |
 | **P2** | Prolog: Valid Arithmetic Equations | `28/code/28_q2.pl` | `28/tests/test_p2.ps1` | `28/prompts/P2.md` | Kakarla Dheeraj |
 | **S1** | Scheme: Binary Tree Traversals | `28/code/28_q3.rkt` | `28/tests/test_s1.ps1` | `28/prompts/S1.md` | Yashavanth |
-| **S2** | Scheme: Conditional Nested List Insertion | `28/code/28_q4.rkt` | `28/tests/test_s2.ps1` | `28/prompts/S2.md` | Group 28 Member (S2) |
+| **S2** | Scheme: Conditional Nested List Insertion | `28/code/28_q4.rkt` | `28/tests/test_s2.ps1` | `28/prompts/S2.md` | Samantula Devendra Supreeth |
 
 ---
 
@@ -22,6 +22,7 @@ The repository strictly follows the deliverable layout defined in Section 4 of t
 ```text
 ppl-assignment-2-group-28/
 ├── 28/
+|   ├── P1_REPORT.md            # Report on P1.b solution count
 │   ├── code/
 │   │   ├── 28_q1.pl            # P1 Prolog solution (definitions only)
 │   │   ├── 28_q2.pl            # P2 Prolog solution (definitions only)
@@ -43,7 +44,6 @@ ppl-assignment-2-group-28/
 │       ├── P2.md               # Prompt log for Problem P2
 │       ├── S1.md               # Prompt log for Problem S1
 │       └── S2.md               # Prompt log for Problem S2
-├── P1_REPORT.md                # Report on P1.b solution counts
 └── README.md                   # Repository documentation and test handoff
 ```
 

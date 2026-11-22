@@ -45,3 +45,9 @@ clue(6, Solution) :-
     member(p('Carla', Dept, _, Project), Solution),
     Dept \= development,
     Project \= embedded.
+
+% Dana's language is not Java, and her department is research or testing.
+clue(7, Solution) :-
+    member(p('Dana', Dept, Lang, _), Solution),
+    Lang \= java,
+    (Dept = research ; Dept = testing).

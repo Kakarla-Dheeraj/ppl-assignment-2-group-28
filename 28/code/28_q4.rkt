@@ -94,3 +94,17 @@
                   (walk-list e)
                   e))))
     walk-list))
+
+;; (print-insert-result) -> void; output only
+;; Reads three data values from standard input with read, in this order:
+;; x (an atom), lst (a possibly nested list) and n (an integer >= 0).
+;; let* binds them one after another, so the reads happen in exactly that
+;; order. Prints (insert-if-short x lst n) with display, then one newline;
+;; no prompt or other text is printed.
+;; Depends on: insert-if-short.
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read)))
+    (display (insert-if-short x lst n))
+    (newline)))

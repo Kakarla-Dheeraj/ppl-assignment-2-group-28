@@ -80,3 +80,36 @@
                   (walk-list e)
                   e))))
     (walk-list lst)))
+
+;; (make-inserter x len-ok?) -> (lambda (lst) ...)
+;; x: any atom; len-ok?: a one-argument predicate on a non-negative integer.
+;; Returns a function of one (possibly nested) proper list that places x at
+;; the front of every list (the given list, every sublist, and every empty
+;; list) whose original top-level length satisfies len-ok?. Atoms are
+;; returned unchanged.
+;; Recursive reading:
+;;   walk-list l: measure len = (my-length l) on the original l first, then
+;;     transform each element with walk-elem via my-map; if (len-ok? len),
+;;     cons x onto the transformed elements. x is added after the elements
+;;     are transformed, so it is never visited again.
+;;   walk-elem e: () or a pair is a list, so recurse with walk-list (() must
+;;     be tested with null?, since (pair? '()) is #f); anything else is an
+;;     atom and is returned as is.
+;; len-ok? is called exactly once per list. Wide lists use constant stack
+;; (my-length and my-map are tail-recursive); the only non-tail recursion is
+;; one walk-list call per nesting level.
+;; Depends on: my-length, my-map.
+(define (make-inserter x len-ok?)
+  (letrec ((walk-list
+            (lambda (l)
+              (let* ((len (my-length l))
+                     (children (my-map walk-elem l)))
+                (if (len-ok? len)
+                    (cons x children)
+                    children))))
+           (walk-elem
+            (lambda (e)
+              (if (or (null? e) (pair? e))
+                  (walk-list e)
+                  e))))
+    walk-list))

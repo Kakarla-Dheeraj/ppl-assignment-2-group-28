@@ -54,32 +54,13 @@
 ;; Returns a copy of lst in which x is placed at the front of every list
 ;; (the top-level list, every sublist, and every empty list) whose original
 ;; top-level length is less than n. Atoms are returned unchanged.
-;; Recursive reading:
-;;   walk-list l: measure len = (my-length l) on the original l first, then
-;;     transform each element with walk-elem via my-map; if len < n, cons x
-;;     onto the transformed elements. x is added after the elements are
-;;     transformed, so it is never visited again.
-;;   walk-elem e: () or a pair is a list, so recurse with walk-list (() must
-;;     be tested with null?, since (pair? '()) is #f); anything else is an
-;;     atom and is returned as is.
-;; my-length and my-map are tail-recursive, so wide lists (10,000 elements)
-;; use constant stack; the only non-tail recursion is one walk-list call per
-;; nesting level (depth 100 is shallow).
-;; Depends on: my-length, my-map.
+;; Reading: build the transformer (make-inserter x len-ok?) whose length
+;; predicate is "less than n", and apply it to lst. make-inserter measures
+;; each original list with my-length before inserting, treats () as a list,
+;; and never revisits the inserted x, so those rules carry over unchanged.
+;; Depends on: make-inserter (which uses my-length and my-map).
 (define (insert-if-short x lst n)
-  (letrec ((walk-list
-            (lambda (l)
-              (let* ((len (my-length l))
-                     (children (my-map walk-elem l)))
-                (if (< len n)
-                    (cons x children)
-                    children))))
-           (walk-elem
-            (lambda (e)
-              (if (or (null? e) (pair? e))
-                  (walk-list e)
-                  e))))
-    (walk-list lst)))
+  ((make-inserter x (lambda (len) (< len n))) lst))
 
 ;; (make-inserter x len-ok?) -> (lambda (lst) ...)
 ;; x: any atom; len-ok?: a one-argument predicate on a non-negative integer.

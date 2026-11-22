@@ -1,4 +1,4 @@
-:- use_module(library(lists), [permutation/2]).
+:- use_module(library(lists), [member/2, permutation/2]).
 
 % candidate_solution(-Solution) generates each fully populated assignment once.
 candidate_solution(Solution) :-
@@ -14,3 +14,9 @@ candidate_solution(Solution) :-
         p('Carla', CarlaDept, CarlaLang, CarlaProject),
         p('Dana', DanaDept, DanaLang, DanaProject)
     ].
+
+% clue(+Number, +GroundSolution) checks the numbered clue against a filled solution.
+clue(1, Solution) :-
+    member(p(Name, Dept, _, 'AI'), Solution),
+    Dept \= research,
+    Name \= 'Dana'.

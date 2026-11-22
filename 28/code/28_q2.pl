@@ -18,3 +18,13 @@ apply_op('/', A, B, Value) :-
     B =\= 0,
     0 =:= A rem B,
     Value is A // B.
+
+% expression(+Numbers, -Tree, -Value)
+% For a finite proper list of non-negative integers, Tree uses every
+% occurrence once in order, and Value is its integer value.
+expression([N], num(N), N).
+expression(Numbers, bin(Op, LeftTree, RightTree), Value) :-
+    nonempty_split(Numbers, LeftNumbers, RightNumbers),
+    expression(LeftNumbers, LeftTree, LeftValue),
+    expression(RightNumbers, RightTree, RightValue),
+    apply_op(Op, LeftValue, RightValue, Value).

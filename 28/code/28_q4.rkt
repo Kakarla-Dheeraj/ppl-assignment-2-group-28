@@ -47,3 +47,36 @@
     (if (null? rest)
         (my-reverse acc)
         (loop (cdr rest) (cons (f (car rest)) acc)))))
+
+;; (insert-if-short x lst n) -> list
+;; x: any atom; lst: a (possibly nested) proper list with no dotted pairs;
+;; n: an integer, n >= 0.
+;; Returns a copy of lst in which x is placed at the front of every list
+;; (the top-level list, every sublist, and every empty list) whose original
+;; top-level length is less than n. Atoms are returned unchanged.
+;; Recursive reading:
+;;   walk-list l: measure len = (my-length l) on the original l first, then
+;;     transform each element with walk-elem via my-map; if len < n, cons x
+;;     onto the transformed elements. x is added after the elements are
+;;     transformed, so it is never visited again.
+;;   walk-elem e: () or a pair is a list, so recurse with walk-list (() must
+;;     be tested with null?, since (pair? '()) is #f); anything else is an
+;;     atom and is returned as is.
+;; my-length and my-map are tail-recursive, so wide lists (10,000 elements)
+;; use constant stack; the only non-tail recursion is one walk-list call per
+;; nesting level (depth 100 is shallow).
+;; Depends on: my-length, my-map.
+(define (insert-if-short x lst n)
+  (letrec ((walk-list
+            (lambda (l)
+              (let* ((len (my-length l))
+                     (children (my-map walk-elem l)))
+                (if (< len n)
+                    (cons x children)
+                    children))))
+           (walk-elem
+            (lambda (e)
+              (if (or (null? e) (pair? e))
+                  (walk-list e)
+                  e))))
+    (walk-list lst)))

@@ -20,3 +20,9 @@ clue(1, Solution) :-
     member(p(Name, Dept, _, 'AI'), Solution),
     Dept \= research,
     Name \= 'Dana'.
+
+% Alex's department is not development and his language is not C++.
+clue(2, Solution) :-
+    member(p('Alex', Dept, Lang, _), Solution),
+    Dept \= development,
+    Lang \= 'c++'.
